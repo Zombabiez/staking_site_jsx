@@ -73,22 +73,12 @@ const PoolSecond = (props) => {
             GEN 2 POOL
           </div>
         </div>
-        <div className="cursor-pointer absolute left-[37px] top-[102px] w-[201px] h-[44px] bg-[#cbff0f] rounded-[10px] flex items-center justify-center">
-          <div className="font-creepster text-[30px] text-black">
-            BATCH STAKE
-          </div>
-        </div>
-        <div className="cursor-pointer absolute left-[37px] top-[164px] w-[201px] h-[44px] bg-[#cbff0f] rounded-[10px] flex items-center justify-center">
-          <div className="font-creepster text-[30px] text-black">
-            BATCH UNSTAKE
-          </div>
-        </div>
-        <div className="absolute left-[344px] top-[45px] flex">
-          <div className="font-face-agency text-[26px] text-[#d44305]">APR</div>
-          <div className="ml-[10px] font-face-agency text-[26px] text-white">
-            %
-          </div>
-        </div>
+        <button className="transition-all absolute left-[37px] top-[102px] w-[201px] h-[44px] bg-[#cbff0f] hover:bg-[#e1ff73] rounded-[10px] flex items-center justify-center font-creepster text-[30px] text-black">
+          BATCH STAKE
+        </button>
+        <button className="transition-all absolute left-[37px] top-[164px] w-[201px] h-[44px] bg-[#cbff0f] hover:bg-[#e1ff73] rounded-[10px] flex items-center justify-center font-creepster text-[30px] text-black">
+          BATCH UNSTAKE
+        </button>
         <div className="absolute left-[267px] top-[109px] ">
           <div className="flex">
             <div className="font-face-agency text-[24px] text-[#cbff0f]">
