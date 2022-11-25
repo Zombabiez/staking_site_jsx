@@ -4,7 +4,9 @@
     "arbitrum",
     "CHAINDATA",
     "Defi",
+    "deficonnect",
     "Defiwallet",
+    "flowbite",
     "gamelevel",
     "poolfirst",
     "poolsecond",
@@ -14,6 +16,7 @@
     "UNSTAKE",
     "wagmi",
     "walletconnect",
+    "webfonts",
     "zombabiez"
   ]
 }

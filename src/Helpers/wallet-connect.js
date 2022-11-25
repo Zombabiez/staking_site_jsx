@@ -60,7 +60,7 @@ export const connect = async () => {
     });
     return newWallet;
   } catch (e) {
-    window.alert(e);
+    // window.alert(e);
     return defaultWallet;
   }
 };

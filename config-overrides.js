@@ -1,4 +1,8 @@
 const { ProvidePlugin } = require("webpack");
+const stdLibBrowser = require("node-stdlib-browser");
+const {
+  NodeProtocolUrlPlugin,
+} = require("node-stdlib-browser/helpers/webpack/plugin");
 
 module.exports = function (config, env) {
   return {
@@ -16,8 +20,10 @@ module.exports = function (config, env) {
     },
     plugins: [
       ...config.plugins,
+      new NodeProtocolUrlPlugin(),
       new ProvidePlugin({
         process: "process/browser",
+        Buffer: [stdLibBrowser.buffer, "Buffer"],
       }),
     ],
     resolve: {

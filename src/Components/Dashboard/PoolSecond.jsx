@@ -6,7 +6,7 @@ import platinum from "../../Assets/Images/StakeMock/poolsecond/platinum.png";
 
 const PoolSecond = (props) => {
   const { gamelevel } = props;
-  console.log(gamelevel);
+
   return (
     <div className="relative ">
       {gamelevel === "bronze" && (
