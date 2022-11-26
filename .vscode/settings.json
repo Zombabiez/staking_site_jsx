@@ -12,6 +12,7 @@
     "poolfirst",
     "poolsecond",
     "qrcode",
+    "STAKECONTRACTS",
     "staker",
     "stakers",
     "tailwindcss",
@@ -20,6 +21,8 @@
     "wagmi",
     "walletconnect",
     "webfonts",
+    "Zombabie",
+    "ZOMBABIENFTCONTRACT",
     "zombabiez"
   ]
 }

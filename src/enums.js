@@ -15,3 +15,11 @@ export const defaultRefreshing = {
 export const defaultChainData = {
   croBalance: 0,
 };
+
+export const defaultStakeContracts = {
+  ZombabieStakingPool1: undefined,
+  ZombabieStakingPool2: undefined,
+  ZombabieStakingPool3: undefined,
+  ZombabieStakingPool4: undefined,
+  ZombabieStakingPool5: undefined,
+};

@@ -1,4 +1,7 @@
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
+// import Web3 from "web3";
+import { ethers } from "ethers"; // npm install ethers
+import { Tooltip } from "flowbite-react";
 
 import logo from "../../Assets/Images/StakeMock/logo.png";
 import layer from "../../Assets/Images/StakeMock/layer.png";
@@ -21,17 +24,49 @@ import {
   updateChainDataAction,
   updateRefreshingAction,
   updateWalletAction,
+  updateStakeContracts,
+  updateZombabieNFTContract,
 } from "../../Store/actions";
 
 import { defaultWallet, defaultChainData } from "../../enums";
-import { Tooltip } from "flowbite-react";
+import { hexToInt } from "../../Helpers/utils";
 
-import stakeContractAbi from "../../abis/stakeContract.json";
+import ZombabieNFTJson from "../../abis/ZombabieNFT.json";
+import ZombabieStakingPool1Json from "../../abis/ZombabieStakingPool1.json";
+import ZombabieStakingPool2Json from "../../abis/ZombabieStakingPool2.json";
+import ZombabieStakingPool3Json from "../../abis/ZombabieStakingPool3.json";
+import ZombabieStakingPool4Json from "../../abis/ZombabieStakingPool4.json";
+import ZombabieStakingPool5Json from "../../abis/ZombabieStakingPool5.json";
 
 const Dashboard = () => {
   const { state, dispatch } = useContext(Store);
-  console.log("🚀 ~ file: Dashboard.jsx ~ line 33 ~ Dashboard ~ state", state);
   const [showWalletPopUp, setShowWalletPopUp] = useState(false);
+  const [unClaimedReward, setUnClaimedReward] = useState();
+  const [gen1Info, setGen1Info] = useState({
+    totalDeposit: undefined,
+    currentDeposit: undefined,
+    Rate: undefined,
+  });
+  const [gen2Info, setGen2Info] = useState({
+    totalDeposit: undefined,
+    currentDeposit: undefined,
+    Rate: undefined,
+  });
+  const [gen3Info, setGen3Info] = useState({
+    totalDeposit: undefined,
+    currentDeposit: undefined,
+    Rate: undefined,
+  });
+  const [gen4Info, setGen4Info] = useState({
+    totalDeposit: undefined,
+    currentDeposit: undefined,
+    Rate: undefined,
+  });
+  const [gen5Info, setGen5Info] = useState({
+    totalDeposit: undefined,
+    currentDeposit: undefined,
+    Rate: undefined,
+  });
 
   const connectWallet = useCallback(async (option) => {
     updateRefreshingAction(dispatch, {
@@ -75,6 +110,125 @@ const Dashboard = () => {
         status: false,
         message: "Complete",
       });
+
+      const ZombabieNFTContract = new ethers.Contract(
+        ZombabieNFTJson.address,
+        ZombabieNFTJson.abi,
+        newWallet.browserWeb3Provider.getSigner()
+      );
+
+      let balance = 0;
+      const ZombabieStakingPool1 = new ethers.Contract(
+        ZombabieStakingPool1Json.address,
+        ZombabieStakingPool1Json.abi,
+        newWallet.browserWeb3Provider.getSigner()
+      );
+      balance += hexToInt(
+        await ZombabieStakingPool1.availableRewards(newWallet.address)
+      );
+      let staker = await ZombabieStakingPool1.stakers(newWallet.address);
+      let Rate = hexToInt(
+        await ZombabieStakingPool1.getMonthlyRate(newWallet.address)
+      );
+      let totalDeposit = hexToInt(await ZombabieStakingPool1.getTotalStaked());
+
+      setGen1Info({
+        Rate,
+        totalDeposit,
+        currentDeposit: hexToInt(staker.amountStaked),
+      });
+
+      const ZombabieStakingPool2 = new ethers.Contract(
+        ZombabieStakingPool2Json.address,
+        ZombabieStakingPool2Json.abi,
+        newWallet.browserWeb3Provider.getSigner()
+      );
+      balance += hexToInt(
+        await ZombabieStakingPool2.availableRewards(newWallet.address)
+      );
+      staker = await ZombabieStakingPool2.stakers(newWallet.address);
+      Rate = hexToInt(
+        await ZombabieStakingPool2.getMonthlyRate(newWallet.address)
+      );
+      totalDeposit = hexToInt(await ZombabieStakingPool2.getTotalStaked());
+
+      setGen2Info({
+        Rate,
+        totalDeposit,
+        currentDeposit: hexToInt(staker.amountStaked),
+      });
+
+      const ZombabieStakingPool3 = new ethers.Contract(
+        ZombabieStakingPool3Json.address,
+        ZombabieStakingPool3Json.abi,
+        newWallet.browserWeb3Provider.getSigner()
+      );
+      balance += hexToInt(
+        await ZombabieStakingPool3.availableRewards(newWallet.address)
+      );
+      staker = await ZombabieStakingPool3.stakers(newWallet.address);
+      Rate = hexToInt(
+        await ZombabieStakingPool3.getMonthlyRate(newWallet.address)
+      );
+      totalDeposit = hexToInt(await ZombabieStakingPool3.getTotalStaked());
+
+      setGen3Info({
+        Rate,
+        totalDeposit,
+        currentDeposit: hexToInt(staker.amountStaked),
+      });
+
+      const ZombabieStakingPool4 = new ethers.Contract(
+        ZombabieStakingPool4Json.address,
+        ZombabieStakingPool4Json.abi,
+        newWallet.browserWeb3Provider.getSigner()
+      );
+      balance += hexToInt(
+        await ZombabieStakingPool4.availableRewards(newWallet.address)
+      );
+      staker = await ZombabieStakingPool4.stakers(newWallet.address);
+      Rate = hexToInt(
+        await ZombabieStakingPool4.getMonthlyRate(newWallet.address)
+      );
+      totalDeposit = hexToInt(await ZombabieStakingPool4.getTotalStaked());
+
+      setGen4Info({
+        Rate,
+        totalDeposit,
+        currentDeposit: hexToInt(staker.amountStaked),
+      });
+
+      const ZombabieStakingPool5 = new ethers.Contract(
+        ZombabieStakingPool5Json.address,
+        ZombabieStakingPool5Json.abi,
+        newWallet.browserWeb3Provider.getSigner()
+      );
+      balance += hexToInt(
+        await ZombabieStakingPool5.availableRewards(newWallet.address)
+      );
+      staker = await ZombabieStakingPool5.stakers(newWallet.address);
+      Rate = hexToInt(
+        await ZombabieStakingPool5.getMonthlyRate(newWallet.address)
+      );
+      totalDeposit = hexToInt(await ZombabieStakingPool5.getTotalStaked());
+
+      setGen5Info({
+        Rate,
+        totalDeposit,
+        currentDeposit: hexToInt(staker.amountStaked),
+      });
+
+      updateStakeContracts(dispatch, {
+        ZombabieStakingPool1,
+        ZombabieStakingPool2,
+        ZombabieStakingPool3,
+        ZombabieStakingPool4,
+        ZombabieStakingPool5,
+      });
+
+      updateZombabieNFTContract(dispatch, ZombabieNFTContract);
+
+      setUnClaimedReward(balance);
     } else {
       updateRefreshingAction(dispatch, {
         status: false,
@@ -95,12 +249,7 @@ const Dashboard = () => {
   }, [connectWallet]);
 
   return (
-    <div className="w-full h-full flex justify-center bg-gradient-to-b from-black via-[#00a6a4] to-black ">
-      {/* <div className="relative w-full h-full flex justify-center  ">
-      <div className="absolute w-full h-full">
-        <img className="w-full h-full" src={bg} alt="" />
-      </div> */}
-
+    <div className="w-full h-full flex justify-center bg-gradient-to-b from-black via-[#00a6a4] to-black">
       <div className="template">
         <div className="flex justify-center">
           <div className="mt-[42px] flex justify-center">
@@ -178,33 +327,34 @@ const Dashboard = () => {
           </div>
         </div>
         <div className="flex justify-center ">
-          <div className="mt-[14px] w-[383px] h-[48px]  bg-black flex  items-center px-[15px]">
+          <div className="mt-[14px] w-[383px] h-[48px] bg-black flex flex-row items-center px-[15px]">
             <div className="font-face-agency text-[30px] text-white">
               UnClaimed Rewards:
             </div>
-          </div>
-        </div>
-        <div className="flex justify-center cursor-pointer">
-          <div className="mt-[21px] w-[194px] h-[48px] rounded-[5px] bg-black flex justify-center items-center">
-            <div className="font-face-agency text-[30px] text-[#00a652]">
-              Claim Rewards
+            <div className="font-face-agency text-[30px] text-white flex-auto text-center">
+              {unClaimedReward === undefined ? "####" : unClaimedReward} CRO
             </div>
           </div>
         </div>
-        <div className="flex justify-center mb-[45px]">
-          <PoolFirst />
+        <div className="flex justify-center">
+          <button className="mt-[21px] w-[194px] h-[48px] rounded-[5px] bg-black flex justify-center items-center font-face-agency text-[30px] text-[#00a652] hover:bg-slate-900">
+            Claim Rewards
+          </button>
         </div>
         <div className="flex justify-center mb-[45px]">
-          <PoolSecond gamelevel="bronze" />
+          <PoolFirst {...gen1Info} />
         </div>
         <div className="flex justify-center mb-[45px]">
-          <PoolSecond gamelevel="silver" />
+          <PoolSecond gamelevel="bronze" {...gen2Info} />
         </div>
         <div className="flex justify-center mb-[45px]">
-          <PoolSecond gamelevel="gold" />
+          <PoolSecond gamelevel="silver" {...gen3Info} />
+        </div>
+        <div className="flex justify-center mb-[45px]">
+          <PoolSecond gamelevel="gold" {...gen4Info} />
         </div>
         <div className="flex justify-center mb-[100px]">
-          <PoolSecond gamelevel="platinum" />
+          <PoolSecond gamelevel="platinum" {...gen5Info} />
         </div>
       </div>
     </div>

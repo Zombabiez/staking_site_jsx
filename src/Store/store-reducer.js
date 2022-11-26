@@ -1,11 +1,18 @@
 import React, { createContext, useReducer } from "react";
-import { defaultWallet, defaultRefreshing, defaultChainData } from "../enums";
+import {
+  defaultWallet,
+  defaultRefreshing,
+  defaultChainData,
+  defaultStakeContracts,
+} from "../enums";
 
 const initialState = {
   context: "welcome",
   refreshing: defaultRefreshing,
   wallet: defaultWallet,
   chainData: defaultChainData,
+  StakeContracts: defaultStakeContracts,
+  ZombabieNFTContract: undefined,
 };
 
 export const Store = createContext(initialState);
@@ -22,6 +29,10 @@ function reducer(state, action) {
       return { ...state, wallet: action.payload };
     case "CHAINDATA_UPDATED":
       return { ...state, chainData: action.payload };
+    case "STAKECONTRACTS_UPDATED":
+      return { ...state, StakeContracts: action.payload };
+    case "ZOMBABIENFTCONTRACT_UPDATED":
+      return { ...state, ZombabieNFTContract: action.payload };
     default:
       return state;
   }

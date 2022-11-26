@@ -4,9 +4,7 @@ import silver from "../../Assets/Images/StakeMock/poolsecond/silver.png";
 import gold from "../../Assets/Images/StakeMock/poolsecond/gold.png";
 import platinum from "../../Assets/Images/StakeMock/poolsecond/platinum.png";
 
-const PoolSecond = (props) => {
-  const { gamelevel } = props;
-
+const PoolSecond = ({ totalDeposit, currentDeposit, Rate, gamelevel }) => {
   return (
     <div className="relative ">
       {gamelevel === "bronze" && (
@@ -84,16 +82,16 @@ const PoolSecond = (props) => {
             <div className="font-face-agency text-[24px] text-[#cbff0f]">
               Total Deposits:
             </div>
-            <div className="ml-[10px] font-face-agency text-[26px] text-white">
-              10
+            <div className="ml-[10px] font-face-agency text-[26px] text-white flex-auto text-center">
+              {totalDeposit === undefined ? "####" : totalDeposit}
             </div>
           </div>
           <div className="flex">
             <div className="font-face-agency text-[24px] text-[#cbff0f]">
               Your Deposits:
             </div>
-            <div className="ml-[10px] font-face-agency text-[26px] text-white">
-              10
+            <div className="ml-[10px] font-face-agency text-[26px] text-white flex-auto text-center">
+              {currentDeposit === undefined ? "####" : currentDeposit}
             </div>
           </div>
         </div>
@@ -101,8 +99,8 @@ const PoolSecond = (props) => {
           <div className="font-face-agency text-[22px] text-[#d44305]">
             Rate:
           </div>
-          <div className="ml-[10px] font-face-agency text-[22px] text-white">
-            $$$$ wCRO/Month
+          <div className="ml-[10px] font-face-agency text-[22px] text-white flex-auto text-center">
+            {Rate === undefined ? "$$$$" : Rate} CRO/Month
           </div>
         </div>
       </div>

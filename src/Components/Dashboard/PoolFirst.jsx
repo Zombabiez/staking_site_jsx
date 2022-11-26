@@ -1,6 +1,6 @@
 import head from "../../Assets/Images/StakeMock/poolfirst/head.png";
 
-const PoolFirst = () => {
+const PoolFirst = ({ totalDeposit, currentDeposit, Rate }) => {
   return (
     <div className="relative m-[10px] w-[515px] h-[265px]">
       <div className="absolute left-[10px] top-[12px] border-[#cbff0f] border-[8px] w-[485px] h-[235px] rounded-[10px] bg-[#201b1b]  shadow-[0_0_8px_8px_rgba(0,0,0,0.7)]"></div>
@@ -23,23 +23,23 @@ const PoolFirst = () => {
           <div className="font-face-agency text-[24px] text-[#cbff0f]">
             Total Deposits:
           </div>
-          <div className="ml-[10px] font-face-agency text-[26px] text-white">
-            10
+          <div className="ml-[10px] font-face-agency text-[26px] text-white flex-auto text-center">
+            {totalDeposit === undefined ? "####" : totalDeposit}
           </div>
         </div>
         <div className="flex">
           <div className="font-face-agency text-[24px] text-[#cbff0f]">
             Your Deposits:
           </div>
-          <div className="ml-[10px] font-face-agency text-[26px] text-white">
-            10
+          <div className="ml-[10px] font-face-agency text-[26px] text-white flex-auto text-center">
+            {currentDeposit === undefined ? "####" : currentDeposit}
           </div>
         </div>
       </div>
       <div className="absolute left-[270px] top-[190px] flex items-end">
         <div className="font-face-agency text-[22px] text-[#d44305]">Rate:</div>
-        <div className="ml-[10px] font-face-agency text-[22px] text-white">
-          $$$$ wCRO/Month
+        <div className="ml-[10px] font-face-agency text-[22px] text-white flex-auto text-center">
+          {Rate === undefined ? "$$$$" : Rate} CRO/Month
         </div>
       </div>
     </div>

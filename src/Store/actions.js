@@ -27,3 +27,17 @@ export const updateChainDataAction = (dispatch, chainData) => {
     payload: chainData,
   });
 };
+
+export const updateStakeContracts = (dispatch, StakeContract) => {
+  return dispatch({
+    type: "STAKECONTRACTS_UPDATED",
+    payload: StakeContract,
+  });
+};
+
+export const updateZombabieNFTContract = (dispatch, ZombabieNFTContract) => {
+  return dispatch({
+    type: "ZOMBABIENFTCONTRACT_UPDATED",
+    payload: ZombabieNFTContract,
+  });
+};
