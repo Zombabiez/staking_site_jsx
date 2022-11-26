@@ -26,7 +26,7 @@ import {
 import { defaultWallet, defaultChainData } from "../../enums";
 import { Tooltip } from "flowbite-react";
 
-// import { Web3Button } from "@web3modal/react";
+import stakeContractAbi from "../../abis/stakeContract.json";
 
 const Dashboard = () => {
   const { state, dispatch } = useContext(Store);
