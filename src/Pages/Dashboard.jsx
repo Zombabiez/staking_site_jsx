@@ -5,7 +5,7 @@ import { Tooltip } from "flowbite-react";
 import logo from "../Assets/Images/StakeMock/logo.png";
 import layer from "../Assets/Images/StakeMock/layer.png";
 
-import StakingPool from "../Components/Dashboard/StakingPool";
+import StakingPool from "../Components/StakingPool";
 
 import { Store } from "../Store/store-reducer";
 import * as config from "../Config/config";
@@ -38,7 +38,7 @@ import ZombabieStakingPool5Json from "../abis/ZombabieStakingPool5.json";
 
 const Dashboard = () => {
   const { state, dispatch } = useContext(Store);
-  console.log("🚀 ~ file: Dashboard.jsx ~ line 42 ~ Dashboard ~ state", state);
+
   const [showWalletPopUp, setShowWalletPopUp] = useState(false);
   const [unClaimedReward, setUnClaimedReward] = useState();
   const [gen1Info, setGen1Info] = useState({
@@ -115,6 +115,8 @@ const Dashboard = () => {
         ZombabieNFTJson.abi,
         newWallet.browserWeb3Provider.getSigner()
       );
+
+      updateZombabieNFTContract(dispatch, ZombabieNFTContract);
 
       let balance = 0;
       const ZombabieStakingPool1 = new ethers.Contract(
@@ -224,8 +226,6 @@ const Dashboard = () => {
         ZombabieStakingPool4,
         ZombabieStakingPool5,
       });
-
-      updateZombabieNFTContract(dispatch, ZombabieNFTContract);
 
       setUnClaimedReward(balance);
     } else {

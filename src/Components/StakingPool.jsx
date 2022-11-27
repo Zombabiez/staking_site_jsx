@@ -1,11 +1,11 @@
 import { createSearchParams, useNavigate } from "react-router-dom";
 
-import Gen1head from "../../Assets/Images/StakeMock/poolfirst/head.png";
-import Gen2head from "../../Assets/Images/StakeMock/poolsecond/head.png";
-import bronze from "../../Assets/Images/StakeMock/poolsecond/bronze.png";
-import silver from "../../Assets/Images/StakeMock/poolsecond/silver.png";
-import gold from "../../Assets/Images/StakeMock/poolsecond/gold.png";
-import platinum from "../../Assets/Images/StakeMock/poolsecond/platinum.png";
+import Gen1head from "../Assets/Images/StakeMock/poolfirst/head.png";
+import Gen2head from "../Assets/Images/StakeMock/poolsecond/head.png";
+import bronze from "../Assets/Images/StakeMock/poolsecond/bronze.png";
+import silver from "../Assets/Images/StakeMock/poolsecond/silver.png";
+import gold from "../Assets/Images/StakeMock/poolsecond/gold.png";
+import platinum from "../Assets/Images/StakeMock/poolsecond/platinum.png";
 
 const StakingPool = ({ totalDeposit, currentDeposit, Rate, pool }) => {
   const navigate = useNavigate();
@@ -78,7 +78,6 @@ const StakingPool = ({ totalDeposit, currentDeposit, Rate, pool }) => {
         <button
           disabled={totalDeposit === undefined}
           onClick={() => {
-            console.log(pool);
             navigate({
               pathname: "/selectNFTs",
               search: createSearchParams({ pool, isStake: true }).toString(),
