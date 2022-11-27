@@ -1,24 +1,22 @@
 import { useCallback, useContext, useEffect, useState } from "react";
-// import Web3 from "web3";
 import { ethers } from "ethers"; // npm install ethers
 import { Tooltip } from "flowbite-react";
 
-import logo from "../../Assets/Images/StakeMock/logo.png";
-import layer from "../../Assets/Images/StakeMock/layer.png";
+import logo from "../Assets/Images/StakeMock/logo.png";
+import layer from "../Assets/Images/StakeMock/layer.png";
 
-import PoolFirst from "../../Components/Dashboard/PoolFirst";
-import PoolSecond from "../../Components/Dashboard/PoolSecond";
+import StakingPool from "../Components/Dashboard/StakingPool";
 
-import { Store } from "../../Store/store-reducer";
-import * as config from "../../Config/config";
-import * as utils from "../../Helpers/utils";
-import * as walletConnect from "../../Helpers/wallet-connect";
-import * as walletMetamask from "../../Helpers/wallet-metamask";
-import * as walletDefiwallet from "../../Helpers/wallet-defiwallet";
+import { Store } from "../Store/store-reducer";
+import * as config from "../Config/config";
+import * as utils from "../Helpers/utils";
+import * as walletConnect from "../Helpers/wallet-connect";
+import * as walletMetamask from "../Helpers/wallet-metamask";
+import * as walletDefiwallet from "../Helpers/wallet-defiwallet";
 
-import metamask from "../../Assets/Images/wallet/metamask.png";
-import defi from "../../Assets/Images/wallet/defi.png";
-import wallet_connect from "../../Assets/Images/wallet/walletconnect.png";
+import metamask from "../Assets/Images/wallet/metamask.png";
+import defi from "../Assets/Images/wallet/defi.png";
+import wallet_connect from "../Assets/Images/wallet/walletconnect.png";
 
 import {
   updateChainDataAction,
@@ -26,20 +24,21 @@ import {
   updateWalletAction,
   updateStakeContracts,
   updateZombabieNFTContract,
-} from "../../Store/actions";
+} from "../Store/actions";
 
-import { defaultWallet, defaultChainData } from "../../enums";
-import { hexToInt } from "../../Helpers/utils";
+import { defaultWallet, defaultChainData } from "../enums";
+import { hexToInt } from "../Helpers/utils";
 
-import ZombabieNFTJson from "../../abis/ZombabieNFT.json";
-import ZombabieStakingPool1Json from "../../abis/ZombabieStakingPool1.json";
-import ZombabieStakingPool2Json from "../../abis/ZombabieStakingPool2.json";
-import ZombabieStakingPool3Json from "../../abis/ZombabieStakingPool3.json";
-import ZombabieStakingPool4Json from "../../abis/ZombabieStakingPool4.json";
-import ZombabieStakingPool5Json from "../../abis/ZombabieStakingPool5.json";
+import ZombabieNFTJson from "../abis/ZombabieNFT.json";
+import ZombabieStakingPool1Json from "../abis/ZombabieStakingPool1.json";
+import ZombabieStakingPool2Json from "../abis/ZombabieStakingPool2.json";
+import ZombabieStakingPool3Json from "../abis/ZombabieStakingPool3.json";
+import ZombabieStakingPool4Json from "../abis/ZombabieStakingPool4.json";
+import ZombabieStakingPool5Json from "../abis/ZombabieStakingPool5.json";
 
 const Dashboard = () => {
   const { state, dispatch } = useContext(Store);
+  console.log("🚀 ~ file: Dashboard.jsx ~ line 42 ~ Dashboard ~ state", state);
   const [showWalletPopUp, setShowWalletPopUp] = useState(false);
   const [unClaimedReward, setUnClaimedReward] = useState();
   const [gen1Info, setGen1Info] = useState({
@@ -239,8 +238,8 @@ const Dashboard = () => {
 
   useEffect(() => {
     async function initialLoad() {
-      if (config.configVars.activateAutoLoginDefiWallet) {
-        await connectWallet("defi-wallet");
+      if (config.configVars.activateAutoLoginWallet) {
+        await connectWallet("injected");
         console.log("Initial load");
       }
     }
@@ -266,9 +265,6 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
-        {/* <Tooltip content="Tooltip content" trigger="click">
-          <Button>Tooltip click</Button>
-        </Tooltip> */}
 
         <div className="flex flex-col justify-center items-center relative">
           <button
@@ -337,24 +333,27 @@ const Dashboard = () => {
           </div>
         </div>
         <div className="flex justify-center">
-          <button className="mt-[21px] w-[194px] h-[48px] rounded-[5px] bg-black flex justify-center items-center font-face-agency text-[30px] text-[#00a652] hover:bg-slate-900">
+          <button
+            disabled={unClaimedReward === undefined}
+            className="mt-[21px] w-[194px] h-[48px] rounded-[5px] bg-black flex justify-center items-center font-face-agency text-[30px] text-[#00a652] hover:bg-slate-900 disabled:cursor-not-allowed disabled:bg-black disabled:text-slate-500"
+          >
             Claim Rewards
           </button>
         </div>
         <div className="flex justify-center mb-[45px]">
-          <PoolFirst {...gen1Info} />
+          <StakingPool pool={1} {...gen1Info} />
         </div>
         <div className="flex justify-center mb-[45px]">
-          <PoolSecond gamelevel="bronze" {...gen2Info} />
+          <StakingPool pool={2} {...gen2Info} />
         </div>
         <div className="flex justify-center mb-[45px]">
-          <PoolSecond gamelevel="silver" {...gen3Info} />
+          <StakingPool pool={3} {...gen3Info} />
         </div>
         <div className="flex justify-center mb-[45px]">
-          <PoolSecond gamelevel="gold" {...gen4Info} />
+          <StakingPool pool={4} {...gen4Info} />
         </div>
         <div className="flex justify-center mb-[100px]">
-          <PoolSecond gamelevel="platinum" {...gen5Info} />
+          <StakingPool pool={5} {...gen5Info} />
         </div>
       </div>
     </div>

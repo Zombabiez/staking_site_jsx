@@ -25,6 +25,7 @@ export const configVars = {
     },
     blockExplorerUrl: "https://cronoscan.com/",
   },
+  activateAutoLoginWallet: true,
 };
 // Mainnet config
 // export const mainNetConfigVars = {
