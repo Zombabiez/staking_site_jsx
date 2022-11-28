@@ -23,3 +23,33 @@ export const defaultStakeContracts = {
   ZombabieStakingPool4: undefined,
   ZombabieStakingPool5: undefined,
 };
+
+export const defaultGenInfo = {
+  totalDeposit: undefined,
+  currentDeposit: undefined,
+  Rate: undefined,
+};
+
+export const StakingRange = [
+  {},
+  {
+    min: 1,
+    max: Number.MAX_VALUE,
+  },
+  {
+    min: 1,
+    max: 5,
+  },
+  {
+    min: 6,
+    max: 15,
+  },
+  {
+    min: 16,
+    max: 39,
+  },
+  {
+    min: 40,
+    max: Number.MAX_VALUE,
+  },
+];

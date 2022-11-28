@@ -90,7 +90,10 @@ const StakingPool = ({ totalDeposit, currentDeposit, Rate, pool }) => {
         <button
           disabled={totalDeposit === undefined}
           onClick={() => {
-            navigate("/selectNFTs", { pool, isStake: false });
+            navigate({
+              pathname: "/selectNFTs",
+              search: createSearchParams({ pool, isStake: false }).toString(),
+            });
           }}
           className="transition-all absolute left-[37px] top-[164px] w-[201px] h-[44px] bg-[#cbff0f] hover:bg-[#e1ff73] rounded-[10px] flex items-center justify-center font-creepster text-[30px] text-black disabled:bg-slate-500 disabled:cursor-not-allowed"
         >
