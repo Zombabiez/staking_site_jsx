@@ -5,7 +5,7 @@ import { Spinner, Tooltip } from "flowbite-react";
 import logo from "../Assets/Images/StakeMock/logo.png";
 import layer from "../Assets/Images/StakeMock/layer.png";
 
-import StakingPool from "../Components/StakingPool";
+import StakingCard from "../Components/StakingCard";
 
 import { Store } from "../Store/store-reducer";
 import * as config from "../Config/config";
@@ -180,27 +180,27 @@ const Dashboard = () => {
       ]);
 
       setGen1Info({
-        Rate: parseFloat(ethers.utils.formatEther(rate1)).toFixed(3),
+        Rate: parseFloat(ethers.utils.formatEther(rate1)).toFixed(2),
         totalDeposit: hexToInt(totalDeposit1),
         currentDeposit: hexToInt(staker1.amountStaked),
       });
       // setGen2Info({
-      //   Rate: parseFloat(ethers.utils.formatEther(rate2)).toFixed(3),
+      //   Rate: parseFloat(ethers.utils.formatEther(rate2)).toFixed(2),
       //   totalDeposit: hexToInt(totalDeposit2),
       //   currentDeposit: hexToInt(staker2.amountStaked),
       // });
       // setGen3Info({
-      //   Rate: parseFloat(ethers.utils.formatEther(rate3)).toFixed(3),
+      //   Rate: parseFloat(ethers.utils.formatEther(rate3)).toFixed(2),
       //   totalDeposit: hexToInt(totalDeposit3),
       //   currentDeposit: hexToInt(staker3.amountStaked),
       // });
       // setGen4Info({
-      //   Rate: parseFloat(ethers.utils.formatEther(rate4)).toFixed(3),
+      //   Rate: parseFloat(ethers.utils.formatEther(rate4)).toFixed(2),
       //   totalDeposit: hexToInt(totalDeposit4),
       //   currentDeposit: hexToInt(staker4.amountStaked),
       // });
       // setGen5Info({
-      //   Rate: parseFloat(ethers.utils.formatEther(rate5)).toFixed(3),
+      //   Rate: parseFloat(ethers.utils.formatEther(rate5)).toFixed(2),
       //   totalDeposit: hexToInt(totalDeposit5),
       //   currentDeposit: hexToInt(staker5.amountStaked),
       // });
@@ -212,7 +212,7 @@ const Dashboard = () => {
       // .add(unclaimed5);
 
       setUnClaimedReward(
-        parseFloat(ethers.utils.formatEther(balance)).toFixed(3)
+        parseFloat(ethers.utils.formatEther(balance)).toFixed(2)
       );
     } else {
       updateRefreshingAction(dispatch, {
@@ -263,7 +263,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="w-full h-full flex justify-center bg-gradient-to-b from-black via-[#00a6a4] to-black">
+    <div className="w-full h-full flex justify-center bg-gradient-to-b px-[20px] from-black via-[#00a6a4] to-black">
       <div className="template">
         <div className="flex justify-center">
           <div className="mt-[42px] flex justify-center">
@@ -272,10 +272,14 @@ const Dashboard = () => {
         </div>
         <div className="flex justify-center">
           <div
-            className="mt-[19px] pt-[3px] flex justify-center w-[493px] h-[86px] items-start"
-            style={{ backgroundImage: `url(${layer})` }}
+            className="mt-[19px] pt-[3px] flex justify-center max-w-[493px] w-full sm:h-[86px] h-[20vw] items-start"
+            style={{
+              backgroundImage: `url(${layer})`,
+              backgroundSize: "contain",
+              backgroundRepeat: "no-repeat",
+            }}
           >
-            <div className="font-face-bison-bold text-[40px] text-black tracking-[2px]">
+            <div className="font-face-bison-bold sm:text-[40px] text-[7vw] text-black tracking-[2px]">
               MULTI-TIER NFT STAKING
             </div>
           </div>
@@ -283,7 +287,7 @@ const Dashboard = () => {
 
         <div className="flex flex-col justify-center items-center relative">
           <button
-            className="transition-all mt-[11px] h-[48px] px-5 rounded-[5px] bg-[#201b1b] hover:bg-[#413737] flex justify-center items-center font-face-agency text-[30px] text-[#e5e418]"
+            className="transition-all mt-[11px] h-[48px] px-5 rounded-[5px] bg-[#201b1b] hover:bg-[#413737] flex justify-center items-center font-face-agency sm:text-[30px] text-[20px] text-[#e5e418]"
             onClick={() => {
               setShowWalletPopUp(!showWalletPopUp);
             }}
@@ -338,11 +342,11 @@ const Dashboard = () => {
           </div>
         </div>
         <div className="flex justify-center ">
-          <div className="mt-[14px] min-w-[383px] px-3 h-[48px] bg-black flex flex-row items-center">
-            <div className="font-face-agency text-[30px] text-white">
+          <div className="mt-[14px] sm:w-[383px] w-full px-3 h-[48px] bg-black flex flex-row items-center sm:text-[30px] text-[20px]">
+            <div className="font-face-agency text-white">
               UnClaimed Rewards:
             </div>
-            <div className="font-face-agency text-[30px] text-white flex-auto text-right">
+            <div className="font-face-agency text-white flex-auto text-right">
               {unClaimedReward === undefined ? "" : unClaimedReward + " CRO"}
             </div>
           </div>
@@ -353,7 +357,7 @@ const Dashboard = () => {
               claimRewards();
             }}
             disabled={unClaimedReward === undefined}
-            className="mt-[21px] w-[194px] h-[48px] rounded-[5px] bg-black flex justify-center items-center font-face-agency text-[30px] text-[#00a652] hover:bg-slate-900 disabled:cursor-not-allowed disabled:bg-black disabled:text-slate-500"
+            className="mt-[21px] w-[194px] h-[48px] rounded-[5px] bg-black flex justify-center items-center font-face-agency sm:text-[30px] text-[20px] text-[#00a652] hover:bg-slate-900 disabled:cursor-not-allowed disabled:bg-black disabled:text-slate-500"
           >
             {isLoading ? (
               <Spinner
@@ -366,20 +370,20 @@ const Dashboard = () => {
             )}
           </button>
         </div>
-        <div className="flex justify-center mb-[45px]">
-          <StakingPool pool={1} {...gen1Info} />
+        <div className="flex justify-center mb-[45px] sm:mt-[50px] mt-[40px]">
+          <StakingCard pool={1} {...gen1Info} />
         </div>
         <div className="flex justify-center mb-[45px]">
-          <StakingPool pool={2} {...gen2Info} />
+          <StakingCard pool={2} {...gen2Info} />
         </div>
         <div className="flex justify-center mb-[45px]">
-          <StakingPool pool={3} {...gen3Info} />
+          <StakingCard pool={3} {...gen3Info} />
         </div>
         <div className="flex justify-center mb-[45px]">
-          <StakingPool pool={4} {...gen4Info} />
+          <StakingCard pool={4} {...gen4Info} />
         </div>
         <div className="flex justify-center mb-[100px]">
-          <StakingPool pool={5} {...gen5Info} />
+          <StakingCard pool={5} {...gen5Info} />
         </div>
       </div>
     </div>
