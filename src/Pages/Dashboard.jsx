@@ -39,6 +39,7 @@ import toast from "react-hot-toast";
 
 const Dashboard = () => {
   const { state, dispatch } = useContext(Store);
+  const { address } = state.wallet;
 
   const [showWalletPopUp, setShowWalletPopUp] = useState(false);
   const [unClaimedReward, setUnClaimedReward] = useState();
@@ -232,20 +233,33 @@ const Dashboard = () => {
   }, [connectWallet]);
 
   const claimRewards = async () => {
-    if (!state.StakeContracts.ZombabieStakingPool1) {
-    }
+    setLoading(true);
     try {
-      await Promise.all([
-        state.StakeContracts.ZombabieStakingPool1.claimRewards(),
-        state.StakeContracts.ZombabieStakingPool2.claimRewards(),
-        state.StakeContracts.ZombabieStakingPool3.claimRewards(),
-        state.StakeContracts.ZombabieStakingPool4.claimRewards(),
-        state.StakeContracts.ZombabieStakingPool5.claimRewards(),
-      ]);
+      const [unclaimed1, unclaimed2, unclaimed3, unclaimed4, unclaimed5] =
+        await Promise.all([
+          state.StakeContracts.ZombabieStakingPool1.availableRewards(address),
+          state.StakeContracts.ZombabieStakingPool2.availableRewards(address),
+          state.StakeContracts.ZombabieStakingPool3.availableRewards(address),
+          state.StakeContracts.ZombabieStakingPool4.availableRewards(address),
+          state.StakeContracts.ZombabieStakingPool5.availableRewards(address),
+        ]);
+
+      if (unclaimed1)
+        await state.StakeContracts.ZombabieStakingPool1.claimRewards();
+      if (unclaimed2)
+        await state.StakeContracts.ZombabieStakingPool2.claimRewards();
+      if (unclaimed3)
+        await state.StakeContracts.ZombabieStakingPool3.claimRewards();
+      if (unclaimed4)
+        await state.StakeContracts.ZombabieStakingPool4.claimRewards();
+      if (unclaimed5)
+        await state.StakeContracts.ZombabieStakingPool5.claimRewards();
+
       toast.success("Successfully claimed rewards!");
     } catch (err) {
       toast.error("Encountered issues!");
     }
+    setLoading(false);
   };
 
   return (

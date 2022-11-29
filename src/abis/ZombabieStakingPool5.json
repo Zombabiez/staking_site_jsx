@@ -1,5 +1,5 @@
 {
-  "address": "0x9ADEa1Fd591DBdeCBF969a933A08179c83A8a896",
+  "address": "0x733215E6E28E982b4B631bE30Ccc1E6D536deFbE",
   "abi": [
     {
       "inputs": [
@@ -210,6 +210,7 @@
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
-    }
+    },
+    { "stateMutability": "payable", "type": "receive" }
   ]
 }

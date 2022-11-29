@@ -28,7 +28,7 @@ const NFTCard = ({ tokenId, selectedList, setSelectedList }) => {
         setSelected(!isSelected);
         setSelectedList(res);
       }}
-      className={`transition-all cursor-pointer hover:opacity-60 w-[300px] h-[300px] bg-black border-red-500 rounded-lg text-white overflow-hidden ${
+      className={`transition-all cursor-pointer hover:opacity-60 w-[250px] max-w-full aspect-square bg-black border-red-500 rounded-lg text-white overflow-hidden ${
         isSelected && "border-[6px]"
       }`}
     >
