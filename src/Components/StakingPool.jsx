@@ -1,11 +1,14 @@
 import { createSearchParams, useNavigate } from "react-router-dom";
 
-import Gen1head from "../Assets/Images/StakeMock/poolfirst/head.png";
-import Gen2head from "../Assets/Images/StakeMock/poolsecond/head.png";
-import bronze from "../Assets/Images/StakeMock/poolsecond/bronze.png";
-import silver from "../Assets/Images/StakeMock/poolsecond/silver.png";
-import gold from "../Assets/Images/StakeMock/poolsecond/gold.png";
-import platinum from "../Assets/Images/StakeMock/poolsecond/platinum.png";
+import Head1 from "../Assets/Images/StakeMock/poolHeads/head1.png";
+import Head2 from "../Assets/Images/StakeMock/poolHeads/head2.png";
+import Head3 from "../Assets/Images/StakeMock/poolHeads/head3.png";
+import Head4 from "../Assets/Images/StakeMock/poolHeads/head4.png";
+import Head5 from "../Assets/Images/StakeMock/poolHeads/head5.png";
+import bronze from "../Assets/Images/StakeMock/bronze.png";
+import silver from "../Assets/Images/StakeMock/silver.png";
+import gold from "../Assets/Images/StakeMock/gold.png";
+import platinum from "../Assets/Images/StakeMock/platinum.png";
 
 const StakingPool = ({ totalDeposit, currentDeposit, Rate, pool }) => {
   const navigate = useNavigate();
@@ -68,7 +71,11 @@ const StakingPool = ({ totalDeposit, currentDeposit, Rate, pool }) => {
       <div className="relative mt-[5px] w-[515px] h-[265px] p-[10px] ">
         <div className="absolute left-[10px] top-[12px] border-[#cbff0f] border-[8px] w-[485px] h-[235px] rounded-[10px] bg-[#201b1b]  shadow-[0_0_8px_8px_rgba(0,0,0,0.7)]"></div>
         <div className="absolute left-[3px] top-[7px]">
-          <img src={pool === 1 ? Gen1head : Gen2head} alt="" />
+          {pool === 1 && <img src={Head1} alt="" className="h-[80px]" />}
+          {pool === 2 && <img src={Head2} alt="" className="h-[80px]" />}
+          {pool === 3 && <img src={Head3} alt="" className="h-[80px]" />}
+          {pool === 4 && <img src={Head4} alt="" className="h-[80px]" />}
+          {pool === 5 && <img src={Head5} alt="" className="h-[80px]" />}
         </div>
         <div className="absolute left-[93px] top-[20px]">
           <div className="font-face-bison-bold text-[48px] text-white tracking-[2px]">
