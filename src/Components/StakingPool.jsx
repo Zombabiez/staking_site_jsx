@@ -82,37 +82,54 @@ const StakingPool = ({ totalDeposit, currentDeposit, Rate, pool }) => {
             GEN {pool === 1 ? "1" : "2"} POOL
           </div>
         </div>
-        <button
-          disabled={totalDeposit === undefined}
-          onClick={() => {
-            navigate({
-              pathname: "/selectNFTs",
-              search: createSearchParams({ pool, isStake: true }).toString(),
-            });
-          }}
-          className="transition-all absolute left-[37px] top-[102px] w-[201px] h-[44px] bg-[#cbff0f] hover:bg-[#e1ff73] rounded-[10px] flex items-center justify-center font-creepster text-[30px] text-black disabled:bg-slate-500 disabled:cursor-not-allowed"
-        >
-          BATCH STAKE
-        </button>
-        <button
-          disabled={totalDeposit === undefined}
-          onClick={() => {
-            navigate({
-              pathname: "/selectNFTs",
-              search: createSearchParams({ pool, isStake: false }).toString(),
-            });
-          }}
-          className="transition-all absolute left-[37px] top-[164px] w-[201px] h-[44px] bg-[#cbff0f] hover:bg-[#e1ff73] rounded-[10px] flex items-center justify-center font-creepster text-[30px] text-black disabled:bg-slate-500 disabled:cursor-not-allowed"
-        >
-          BATCH UNSTAKE
-        </button>
+        {pool === 1 ? (
+          <>
+            <button
+              disabled={totalDeposit === undefined}
+              onClick={() => {
+                navigate({
+                  pathname: "/selectNFTs",
+                  search: createSearchParams({
+                    pool,
+                    isStake: true,
+                  }).toString(),
+                });
+              }}
+              className="transition-all absolute left-[37px] top-[102px] w-[201px] h-[44px] bg-[#cbff0f] hover:bg-[#e1ff73] rounded-[10px] flex items-center justify-center font-creepster text-[30px] text-black disabled:bg-slate-500 disabled:cursor-not-allowed"
+            >
+              BATCH STAKE
+            </button>
+            <button
+              disabled={totalDeposit === undefined}
+              onClick={() => {
+                navigate({
+                  pathname: "/selectNFTs",
+                  search: createSearchParams({
+                    pool,
+                    isStake: false,
+                  }).toString(),
+                });
+              }}
+              className="transition-all absolute left-[37px] top-[164px] w-[201px] h-[44px] bg-[#cbff0f] hover:bg-[#e1ff73] rounded-[10px] flex items-center justify-center font-creepster text-[30px] text-black disabled:bg-slate-500 disabled:cursor-not-allowed"
+            >
+              BATCH UNSTAKE
+            </button>
+          </>
+        ) : (
+          <div className="left-[37px] absolute top-[102px] w-[201px] h-[106px] bg-black font-creepster rounded-[10px] text-center flex  items-center justify-center text-[#cbff0f] text-[30px] leading-[30px]">
+            Available
+            <br />
+            at gen 2<br />
+            mint out!
+          </div>
+        )}
         <div className="absolute left-[267px] top-[109px] ">
           <div className="flex">
             <div className="font-face-agency text-[24px] text-[#cbff0f]">
               Total Deposits:
             </div>
             <div className="ml-[10px] font-face-agency text-[26px] text-white flex-auto text-center">
-              {totalDeposit === undefined ? "####" : totalDeposit}
+              {totalDeposit === undefined ? "" : totalDeposit}
             </div>
           </div>
           <div className="flex">
@@ -120,7 +137,7 @@ const StakingPool = ({ totalDeposit, currentDeposit, Rate, pool }) => {
               Your Deposits:
             </div>
             <div className="ml-[10px] font-face-agency text-[26px] text-white flex-auto text-center">
-              {currentDeposit === undefined ? "####" : currentDeposit}
+              {currentDeposit === undefined ? "" : currentDeposit}
             </div>
           </div>
         </div>
@@ -129,7 +146,7 @@ const StakingPool = ({ totalDeposit, currentDeposit, Rate, pool }) => {
             Rate:
           </div>
           <div className="ml-[10px] font-face-agency text-[22px] text-white flex-auto text-center">
-            {Rate === undefined ? "$$$$" : Rate} CRO/Month
+            {Rate === undefined ? "" : Rate + " CRO/Month"}
           </div>
         </div>
       </div>

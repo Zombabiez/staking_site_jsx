@@ -137,46 +137,46 @@ const Dashboard = () => {
 
       const [
         unclaimed1,
-        unclaimed2,
-        unclaimed3,
-        unclaimed4,
-        unclaimed5,
+        // unclaimed2,
+        // unclaimed3,
+        // unclaimed4,
+        // unclaimed5,
         totalDeposit1,
-        totalDeposit2,
-        totalDeposit3,
-        totalDeposit4,
-        totalDeposit5,
+        // totalDeposit2,
+        // totalDeposit3,
+        // totalDeposit4,
+        // totalDeposit5,
         staker1,
-        staker2,
-        staker3,
-        staker4,
-        staker5,
+        // staker2,
+        // staker3,
+        // staker4,
+        // staker5,
         rate1,
-        rate2,
-        rate3,
-        rate4,
-        rate5,
+        // rate2,
+        // rate3,
+        // rate4,
+        // rate5,
       ] = await Promise.all([
         ZombabieStakingPool1.availableRewards(newWallet.address),
-        ZombabieStakingPool2.availableRewards(newWallet.address),
-        ZombabieStakingPool3.availableRewards(newWallet.address),
-        ZombabieStakingPool4.availableRewards(newWallet.address),
-        ZombabieStakingPool5.availableRewards(newWallet.address),
+        // ZombabieStakingPool2.availableRewards(newWallet.address),
+        // ZombabieStakingPool3.availableRewards(newWallet.address),
+        // ZombabieStakingPool4.availableRewards(newWallet.address),
+        // ZombabieStakingPool5.availableRewards(newWallet.address),
         ZombabieStakingPool1.getTotalStaked(),
-        ZombabieStakingPool2.getTotalStaked(),
-        ZombabieStakingPool3.getTotalStaked(),
-        ZombabieStakingPool4.getTotalStaked(),
-        ZombabieStakingPool5.getTotalStaked(),
+        // ZombabieStakingPool2.getTotalStaked(),
+        // ZombabieStakingPool3.getTotalStaked(),
+        // ZombabieStakingPool4.getTotalStaked(),
+        // ZombabieStakingPool5.getTotalStaked(),
         ZombabieStakingPool1.stakers(newWallet.address),
-        ZombabieStakingPool2.stakers(newWallet.address),
-        ZombabieStakingPool3.stakers(newWallet.address),
-        ZombabieStakingPool4.stakers(newWallet.address),
-        ZombabieStakingPool5.stakers(newWallet.address),
+        // ZombabieStakingPool2.stakers(newWallet.address),
+        // ZombabieStakingPool3.stakers(newWallet.address),
+        // ZombabieStakingPool4.stakers(newWallet.address),
+        // ZombabieStakingPool5.stakers(newWallet.address),
         ZombabieStakingPool1.getMonthlyRate(newWallet.address),
-        ZombabieStakingPool2.getMonthlyRate(newWallet.address),
-        ZombabieStakingPool3.getMonthlyRate(newWallet.address),
-        ZombabieStakingPool4.getMonthlyRate(newWallet.address),
-        ZombabieStakingPool5.getMonthlyRate(newWallet.address),
+        // ZombabieStakingPool2.getMonthlyRate(newWallet.address),
+        // ZombabieStakingPool3.getMonthlyRate(newWallet.address),
+        // ZombabieStakingPool4.getMonthlyRate(newWallet.address),
+        // ZombabieStakingPool5.getMonthlyRate(newWallet.address),
       ]);
 
       setGen1Info({
@@ -184,32 +184,32 @@ const Dashboard = () => {
         totalDeposit: hexToInt(totalDeposit1),
         currentDeposit: hexToInt(staker1.amountStaked),
       });
-      setGen2Info({
-        Rate: parseFloat(ethers.utils.formatEther(rate2)).toFixed(3),
-        totalDeposit: hexToInt(totalDeposit2),
-        currentDeposit: hexToInt(staker2.amountStaked),
-      });
-      setGen3Info({
-        Rate: parseFloat(ethers.utils.formatEther(rate3)).toFixed(3),
-        totalDeposit: hexToInt(totalDeposit3),
-        currentDeposit: hexToInt(staker3.amountStaked),
-      });
-      setGen4Info({
-        Rate: parseFloat(ethers.utils.formatEther(rate4)).toFixed(3),
-        totalDeposit: hexToInt(totalDeposit4),
-        currentDeposit: hexToInt(staker4.amountStaked),
-      });
-      setGen5Info({
-        Rate: parseFloat(ethers.utils.formatEther(rate5)).toFixed(3),
-        totalDeposit: hexToInt(totalDeposit5),
-        currentDeposit: hexToInt(staker5.amountStaked),
-      });
+      // setGen2Info({
+      //   Rate: parseFloat(ethers.utils.formatEther(rate2)).toFixed(3),
+      //   totalDeposit: hexToInt(totalDeposit2),
+      //   currentDeposit: hexToInt(staker2.amountStaked),
+      // });
+      // setGen3Info({
+      //   Rate: parseFloat(ethers.utils.formatEther(rate3)).toFixed(3),
+      //   totalDeposit: hexToInt(totalDeposit3),
+      //   currentDeposit: hexToInt(staker3.amountStaked),
+      // });
+      // setGen4Info({
+      //   Rate: parseFloat(ethers.utils.formatEther(rate4)).toFixed(3),
+      //   totalDeposit: hexToInt(totalDeposit4),
+      //   currentDeposit: hexToInt(staker4.amountStaked),
+      // });
+      // setGen5Info({
+      //   Rate: parseFloat(ethers.utils.formatEther(rate5)).toFixed(3),
+      //   totalDeposit: hexToInt(totalDeposit5),
+      //   currentDeposit: hexToInt(staker5.amountStaked),
+      // });
 
-      let balance = BigNumber.from(unclaimed1)
-        .add(unclaimed2)
-        .add(unclaimed3)
-        .add(unclaimed4)
-        .add(unclaimed5);
+      let balance = BigNumber.from(unclaimed1);
+      // .add(unclaimed2)
+      // .add(unclaimed3)
+      // .add(unclaimed4)
+      // .add(unclaimed5);
 
       setUnClaimedReward(
         parseFloat(ethers.utils.formatEther(balance)).toFixed(3)
@@ -342,8 +342,8 @@ const Dashboard = () => {
             <div className="font-face-agency text-[30px] text-white">
               UnClaimed Rewards:
             </div>
-            <div className="font-face-agency text-[30px] text-white flex-auto text-center">
-              {unClaimedReward === undefined ? "####" : unClaimedReward} CRO
+            <div className="font-face-agency text-[30px] text-white flex-auto text-right">
+              {unClaimedReward === undefined ? "" : unClaimedReward + " CRO"}
             </div>
           </div>
         </div>
