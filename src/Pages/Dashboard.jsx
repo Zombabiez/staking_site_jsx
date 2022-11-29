@@ -244,15 +244,15 @@ const Dashboard = () => {
           state.StakeContracts.ZombabieStakingPool5.availableRewards(address),
         ]);
 
-      if (unclaimed1)
+      if (hexToInt(unclaimed1))
         await state.StakeContracts.ZombabieStakingPool1.claimRewards();
-      if (unclaimed2)
+      if (hexToInt(unclaimed2))
         await state.StakeContracts.ZombabieStakingPool2.claimRewards();
-      if (unclaimed3)
+      if (hexToInt(unclaimed3))
         await state.StakeContracts.ZombabieStakingPool3.claimRewards();
-      if (unclaimed4)
+      if (hexToInt(unclaimed4))
         await state.StakeContracts.ZombabieStakingPool4.claimRewards();
-      if (unclaimed5)
+      if (hexToInt(unclaimed5))
         await state.StakeContracts.ZombabieStakingPool5.claimRewards();
 
       toast.success("Successfully claimed rewards!");
