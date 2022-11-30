@@ -19,7 +19,7 @@ export const switchNetwork = async () => {
   try {
     await window.ethereum.request({
       method: "wallet_switchEthereumChain",
-      params: [{ chainId: config.configVars.rpcNetwork.chainIdHex }],
+      params: [{ chainId: config.configVars.rpcNetwork_mainnet.chainIdHex }],
     });
   } catch (e) {
     console.log(e);
@@ -27,11 +27,13 @@ export const switchNetwork = async () => {
       method: "wallet_addEthereumChain",
       params: [
         {
-          chainId: config.configVars.rpcNetwork.chainIdHex,
-          chainName: config.configVars.rpcNetwork.chainName,
-          rpcUrls: [config.configVars.rpcNetwork.rpcUrl],
-          nativeCurrency: config.configVars.rpcNetwork.nativeCurrency,
-          blockExplorerUrls: [config.configVars.rpcNetwork.blockExplorerUrl],
+          chainId: config.configVars.rpcNetwork_mainnet.chainIdHex,
+          chainName: config.configVars.rpcNetwork_mainnet.chainName,
+          rpcUrls: [config.configVars.rpcNetwork_mainnet.rpcUrl],
+          nativeCurrency: config.configVars.rpcNetwork_mainnet.nativeCurrency,
+          blockExplorerUrls: [
+            config.configVars.rpcNetwork_mainnet.blockExplorerUrl,
+          ],
         },
       ],
     });
@@ -42,7 +44,7 @@ export const switchNetwork = async () => {
 export const connect = async () => {
   try {
     let chainId = await window.ethereum.request({ method: "eth_chainId" });
-    if (!(chainId === config.configVars.rpcNetwork.chainIdHex)) {
+    if (!(chainId === config.configVars.rpcNetwork_mainnet.chainIdHex)) {
       await switchNetwork();
       await utils.delay(2000);
       return defaultWallet;
@@ -56,7 +58,7 @@ export const connect = async () => {
       address: accounts[0],
       browserWeb3Provider: new ethers.providers.Web3Provider(window.ethereum),
       serverWeb3Provider: new ethers.providers.JsonRpcProvider(
-        config.configVars.rpcNetwork.rpcUrl
+        config.configVars.rpcNetwork_mainnet.rpcUrl
       ),
       connected: true,
       chainId: utils.hexToInt(

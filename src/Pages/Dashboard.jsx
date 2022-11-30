@@ -23,13 +23,15 @@ import {
   updateRefreshingAction,
   updateWalletAction,
   updateStakeContracts,
-  updateZombabieNFTContract,
+  updateZombabieNFTGen1Contract,
+  updateZombabieNFTGen2Contract,
 } from "../Store/actions";
 
 import { defaultWallet, defaultChainData, defaultGenInfo } from "../enums";
 import { hexToInt } from "../Helpers/utils";
 
-import ZombabieNFTJson from "../abis/ZombabieNFT.json";
+import ZombabieNFTGen1Json from "../abis/ZombabieNFTGen1.json";
+import ZombabieNFTGen2Json from "../abis/ZombabieNFTGen2.json";
 import ZombabieStakingPool1Json from "../abis/ZombabieStakingPool1.json";
 import ZombabieStakingPool2Json from "../abis/ZombabieStakingPool2.json";
 import ZombabieStakingPool3Json from "../abis/ZombabieStakingPool3.json";
@@ -93,13 +95,21 @@ const Dashboard = () => {
         message: "Complete",
       });
 
-      //* ZombabieNFT Contract
-      const ZombabieNFTContract = new ethers.Contract(
-        ZombabieNFTJson.address,
-        ZombabieNFTJson.abi,
+      //* ZombabieNFTGen1 Contract
+      const ZombabieNFTGen1Contract = new ethers.Contract(
+        ZombabieNFTGen1Json.address,
+        ZombabieNFTGen1Json.abi,
         newWallet.browserWeb3Provider.getSigner()
       );
-      updateZombabieNFTContract(dispatch, ZombabieNFTContract);
+      updateZombabieNFTGen1Contract(dispatch, ZombabieNFTGen1Contract);
+
+      // //* ZombabieNFTGen2 Contract
+      // const ZombabieNFTGen2Contract = new ethers.Contract(
+      //   ZombabieNFTGen2Json.address,
+      //   ZombabieNFTGen2Json.abi,
+      //   newWallet.browserWeb3Provider.getSigner()
+      // );
+      // updateZombabieNFTGen1Contract(dispatch, ZombabieNFTGen2Contract);
 
       //* ZombabieStaking Contracts
       const ZombabieStakingPool1 = new ethers.Contract(
@@ -235,25 +245,30 @@ const Dashboard = () => {
   const claimRewards = async () => {
     setLoading(true);
     try {
-      const [unclaimed1, unclaimed2, unclaimed3, unclaimed4, unclaimed5] =
-        await Promise.all([
-          state.StakeContracts.ZombabieStakingPool1.availableRewards(address),
-          state.StakeContracts.ZombabieStakingPool2.availableRewards(address),
-          state.StakeContracts.ZombabieStakingPool3.availableRewards(address),
-          state.StakeContracts.ZombabieStakingPool4.availableRewards(address),
-          state.StakeContracts.ZombabieStakingPool5.availableRewards(address),
-        ]);
+      const [
+        unclaimed1,
+        //  unclaimed2,
+        // unclaimed3,
+        //  unclaimed4,
+        // unclaimed5
+      ] = await Promise.all([
+        state.StakeContracts.ZombabieStakingPool1.availableRewards(address),
+        state.StakeContracts.ZombabieStakingPool2.availableRewards(address),
+        state.StakeContracts.ZombabieStakingPool3.availableRewards(address),
+        state.StakeContracts.ZombabieStakingPool4.availableRewards(address),
+        state.StakeContracts.ZombabieStakingPool5.availableRewards(address),
+      ]);
 
       if (hexToInt(unclaimed1))
         await state.StakeContracts.ZombabieStakingPool1.claimRewards();
-      if (hexToInt(unclaimed2))
-        await state.StakeContracts.ZombabieStakingPool2.claimRewards();
-      if (hexToInt(unclaimed3))
-        await state.StakeContracts.ZombabieStakingPool3.claimRewards();
-      if (hexToInt(unclaimed4))
-        await state.StakeContracts.ZombabieStakingPool4.claimRewards();
-      if (hexToInt(unclaimed5))
-        await state.StakeContracts.ZombabieStakingPool5.claimRewards();
+      // if (hexToInt(unclaimed2))
+      //   await state.StakeContracts.ZombabieStakingPool2.claimRewards();
+      // if (hexToInt(unclaimed3))
+      //   await state.StakeContracts.ZombabieStakingPool3.claimRewards();
+      // if (hexToInt(unclaimed4))
+      //   await state.StakeContracts.ZombabieStakingPool4.claimRewards();
+      // if (hexToInt(unclaimed5))
+      //   await state.StakeContracts.ZombabieStakingPool5.claimRewards();
 
       toast.success("Successfully claimed rewards!");
     } catch (err) {
@@ -347,7 +362,7 @@ const Dashboard = () => {
               UnClaimed Rewards:
             </div>
             <div className="font-face-agency text-white flex-auto text-right">
-              {unClaimedReward === undefined ? "" : unClaimedReward + " CRO"}
+              {unClaimedReward === undefined ? "" : unClaimedReward + " wCRO"}
             </div>
           </div>
         </div>

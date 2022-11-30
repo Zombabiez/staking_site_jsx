@@ -12,7 +12,8 @@ const initialState = {
   wallet: defaultWallet,
   chainData: defaultChainData,
   StakeContracts: defaultStakeContracts,
-  ZombabieNFTContract: undefined,
+  ZombabieNFTGen1Contract: undefined,
+  ZombabieNFTGen2Contract: undefined,
 };
 
 export const Store = createContext(initialState);
@@ -31,8 +32,10 @@ function reducer(state, action) {
       return { ...state, chainData: action.payload };
     case "STAKECONTRACTS_UPDATED":
       return { ...state, StakeContracts: action.payload };
-    case "ZOMBABIENFTCONTRACT_UPDATED":
-      return { ...state, ZombabieNFTContract: action.payload };
+    case "ZOMBABIENFTGEN1CONTRACT_UPDATED":
+      return { ...state, ZombabieNFTGen1Contract: action.payload };
+    case "ZOMBABIENFTGEN2CONTRACT_UPDATED":
+      return { ...state, ZombabieNFTGen2Contract: action.payload };
     default:
       return state;
   }

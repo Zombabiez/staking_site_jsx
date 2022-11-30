@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
 
-const NFTCard = ({ tokenId, selectedList, setSelectedList }) => {
+const NFTCard = ({ tokenId, selectedList, setSelectedList, pool }) => {
   const [imagePath, setImagePath] = useState();
   const [isSelected, setSelected] = useState(false);
 
   useEffect(() => {
     setImagePath(
-      "https://ipfs.io/ipfs/QmRn52MzEUnd8DD2UQugi6khgPPFjrztGHBKKHgakftbnN/" +
-        tokenId +
-        ".png"
+      `https://ipfs.io/ipfs/${
+        pool === 1
+          ? "Qmecr9u77NMse117M1CJjNnt1aNV1L9G897AhHmbhBiZdM"
+          : "QmRn52MzEUnd8DD2UQugi6khgPPFjrztGHBKKHgakftbnN"
+      }/${tokenId}".png`
     );
   }, [tokenId]);
 

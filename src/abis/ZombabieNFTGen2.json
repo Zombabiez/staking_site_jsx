@@ -1,5 +1,5 @@
 {
-  "address": "0x6a33F717f230a749c6265a8e791dcB47ae245c00",
+  "address": "0x8ee54067dbb58d872424050234df6162aa27c06d",
   "abi": [
     {
       "inputs": [
@@ -265,7 +265,7 @@
         { "internalType": "address", "name": "from", "type": "address" },
         { "internalType": "address", "name": "to", "type": "address" },
         { "internalType": "uint256", "name": "tokenId", "type": "uint256" },
-        { "internalType": "bytes", "name": "data", "type": "bytes" }
+        { "internalType": "bytes", "name": "_data", "type": "bytes" }
       ],
       "name": "safeTransferFrom",
       "outputs": [],

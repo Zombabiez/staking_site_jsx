@@ -33,16 +33,31 @@ const SelectNFTs = () => {
     state.StakeContracts.ZombabieStakingPool4,
     state.StakeContracts.ZombabieStakingPool5,
   ];
-  const { ZombabieNFTContract } = state;
+  const { ZombabieNFTGen1Contract, ZombabieNFTGen2Contract } = state;
+
+  const ZombabieNFTContract =
+    pool === 1 ? ZombabieNFTGen1Contract : ZombabieNFTGen2Contract;
 
   const initializeNFTList = async () => {
     if (isStake) {
-      const res = await ZombabieNFTContract.walletOfOwner(address);
-      let tokenIds = [];
-      res.forEach((element) => {
-        tokenIds.push(hexToInt(element));
-      });
-      setTokenIdList(tokenIds);
+      if (pool === 1) {
+        const count = hexToInt(await ZombabieNFTContract.balanceOf(address));
+        let tokenIds = [];
+
+        for (let i = 0; i < count; i++) {
+          tokenIds.push(
+            hexToInt(await ZombabieNFTContract.tokenOfOwnerByIndex(address, i))
+          );
+        }
+        setTokenIdList(tokenIds);
+      } else {
+        const res = await ZombabieNFTContract.walletOfOwner(address);
+        let tokenIds = [];
+        res.forEach((element) => {
+          tokenIds.push(hexToInt(element));
+        });
+        setTokenIdList(tokenIds);
+      }
     } else {
       const res = await zombabieStakingContract[pool].getStakedTokens(address);
       let tokenIds = [];
@@ -129,22 +144,40 @@ const SelectNFTs = () => {
   }
   return (
     <div className="w-full h-full min-h-screen bg-gradient-to-b from-black via-[#00a6a4] to-black flex justify-center p-10">
-      <div className="max-w-7xl w-full flex flex-col items-center gap-5">
+      <div className="max-w-7xl w-full flex flex-col items-center gap-5 mb-[80px]">
         <img src={logo} alt="Zombabies" />
         <div className="flex flex-row flex-wrap flex-auto gap-4 justify-center items-center">
           {tokenIdList !== undefined ? (
-            tokenIdList.map((tokenId) => {
-              return (
-                <NFTCard
-                  tokenId={tokenId}
-                  key={tokenId}
-                  selectedList={selectedList}
-                  setSelectedList={setSelectedList}
-                />
-              );
-            })
+            tokenIdList.length === 0 ? (
+              <p className="font-creepster sm:text-[40px] text-[20px] text-white text-center">
+                You don't have NFT.
+                <br /> Please mint{" "}
+                <span>
+                  <a
+                    href="https://www.zombabies.io/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-black transition-all hover:text-slate-700"
+                  >
+                    here
+                  </a>
+                </span>
+              </p>
+            ) : (
+              tokenIdList.map((tokenId) => {
+                return (
+                  <NFTCard
+                    tokenId={tokenId}
+                    key={tokenId}
+                    selectedList={selectedList}
+                    setSelectedList={setSelectedList}
+                    pool={pool}
+                  />
+                );
+              })
+            )
           ) : (
-            <div className="flex flex-row justify-center items-center font-creepster text-[30px] text-white">
+            <div className="flex flex-row justify-center items-center font-creepster sm:text-[30px] text-[20px] text-white">
               <Spinner
                 className="mr-3"
                 color="success"
