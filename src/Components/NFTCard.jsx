@@ -10,7 +10,7 @@ const NFTCard = ({ tokenId, selectedList, setSelectedList, pool }) => {
         pool === 1
           ? "Qmecr9u77NMse117M1CJjNnt1aNV1L9G897AhHmbhBiZdM"
           : "QmRn52MzEUnd8DD2UQugi6khgPPFjrztGHBKKHgakftbnN"
-      }/${tokenId}".png`
+      }/${tokenId}.png`
     );
   }, [tokenId]);
 
