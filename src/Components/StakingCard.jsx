@@ -103,7 +103,7 @@ const StakingCard = ({ totalDeposit, currentDeposit, Rate, pool }) => {
             <div className="flex flex-row w-full gap-2 text-[20px]">
               <div className="font-face-agency text-[#d44305]">Rate:</div>
               <div className="flex-auto font-face-agency text-white text-left">
-                {Rate === undefined ? "" : Rate + " wCRO/Month"}
+                {Rate === undefined ? "" : Rate + " CRO/Month"}
               </div>
             </div>
           </div>

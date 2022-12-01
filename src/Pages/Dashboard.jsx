@@ -362,7 +362,7 @@ const Dashboard = () => {
               UnClaimed Rewards:
             </div>
             <div className="font-face-agency text-white flex-auto text-right">
-              {unClaimedReward === undefined ? "" : unClaimedReward + " wCRO"}
+              {unClaimedReward === undefined ? "" : unClaimedReward + " CRO"}
             </div>
           </div>
         </div>
