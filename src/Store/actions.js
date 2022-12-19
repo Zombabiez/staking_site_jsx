@@ -35,6 +35,13 @@ export const updateStakeContracts = (dispatch, StakeContract) => {
   });
 };
 
+export const updateZombabieNFTContract = (dispatch, ZombabieNFTContract) => {
+  return dispatch({
+    type: "ZOMBABIENFTCONTRACT_UPDATED",
+    payload: ZombabieNFTContract,
+  });
+};
+
 export const updateZombabieNFTGen1Contract = (
   dispatch,
   ZombabieNFTGen1Contract

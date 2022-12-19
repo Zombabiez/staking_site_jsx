@@ -1,5 +1,5 @@
 {
-  "address": "0x5A1A809Fae5B83bDdD7Ec4864C84953240B0408f",
+  "address": "0x3De2C4Ef56ebDeC9AE7693E1db64fE60d2779872",
   "abi": [
     {
       "inputs": [
@@ -83,6 +83,13 @@
       "type": "function"
     },
     {
+      "inputs": [],
+      "name": "getRewardPerHour",
+      "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
       "inputs": [
         { "internalType": "address", "name": "_user", "type": "address" }
       ],
@@ -127,15 +134,6 @@
     {
       "inputs": [],
       "name": "renounceOwnership",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        { "internalType": "uint256", "name": "_newCost", "type": "uint256" }
-      ],
-      "name": "setRewardsPerHour",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"

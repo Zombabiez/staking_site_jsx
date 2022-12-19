@@ -41,47 +41,36 @@ const StakingCard = ({ totalDeposit, currentDeposit, Rate, pool }) => {
         </div>
         <div className="flex sm:flex-row flex-col-reverse sm:flex-auto">
           <div className="flex-1 flex sm:flex-col flex-row sm:gap-0 gap-2 justify-between sm:py-6 py-1 sm:mb-0 mb-2 px-4 sm:items-center items-stretch">
-            {pool === 1 ? (
-              <>
-                <button
-                  disabled={totalDeposit === undefined}
-                  onClick={() => {
-                    navigate({
-                      pathname: "/selectNFTs",
-                      search: createSearchParams({
-                        pool,
-                        isStake: true,
-                      }).toString(),
-                    });
-                  }}
-                  className="transition-all sm:w-[201px] sm:h-[44px] w-auto h-auto sm:py-0 py-2 bg-[#cbff0f] hover:bg-[#e1ff73] rounded-[10px] flex sm:flex-initial flex-1 items-center justify-center font-creepster sm:text-[30px] text-[20px] sm:leading-[30px] leading-[20px] text-black disabled:bg-slate-500 disabled:cursor-not-allowed"
-                >
-                  BATCH STAKE
-                </button>
-                <button
-                  disabled={totalDeposit === undefined}
-                  onClick={() => {
-                    navigate({
-                      pathname: "/selectNFTs",
-                      search: createSearchParams({
-                        pool,
-                        isStake: false,
-                      }).toString(),
-                    });
-                  }}
-                  className="transition-all sm:w-[201px] sm:h-[44px] w-auto h-auto sm:p-0 py-2 bg-[#cbff0f] hover:bg-[#e1ff73] rounded-[10px] flex sm:flex-initial flex-1 items-center justify-center font-creepster sm:text-[30px] text-[20px] sm:leading-[30px] leading-[20px] text-black disabled:bg-slate-500 disabled:cursor-not-allowed"
-                >
-                  BATCH UNSTAKE
-                </button>
-              </>
-            ) : (
-              <div className="w-full h-full bg-black font-creepster rounded-[10px] text-center flex items-center justify-center text-[#cbff0f] sm:text-[30px] text-[20px] sm:leading-[30px] leading-[20px] sm:py-0 py-2">
-                Available
-                <br />
-                at gen 2<br />
-                mint out!
-              </div>
-            )}
+            <button
+              disabled={totalDeposit === undefined}
+              onClick={() => {
+                navigate({
+                  pathname: "/selectNFTs",
+                  search: createSearchParams({
+                    pool,
+                    isStake: true,
+                  }).toString(),
+                });
+              }}
+              className="transition-all sm:w-[201px] sm:h-[44px] w-auto h-auto sm:py-0 py-2 bg-[#cbff0f] hover:bg-[#e1ff73] rounded-[10px] flex sm:flex-initial flex-1 items-center justify-center font-creepster sm:text-[30px] text-[20px] sm:leading-[30px] leading-[20px] text-black disabled:bg-slate-500 disabled:cursor-not-allowed"
+            >
+              BATCH STAKE
+            </button>
+            <button
+              disabled={totalDeposit === undefined}
+              onClick={() => {
+                navigate({
+                  pathname: "/selectNFTs",
+                  search: createSearchParams({
+                    pool,
+                    isStake: false,
+                  }).toString(),
+                });
+              }}
+              className="transition-all sm:w-[201px] sm:h-[44px] w-auto h-auto sm:p-0 py-2 bg-[#cbff0f] hover:bg-[#e1ff73] rounded-[10px] flex sm:flex-initial flex-1 items-center justify-center font-creepster sm:text-[30px] text-[20px] sm:leading-[30px] leading-[20px] text-black disabled:bg-slate-500 disabled:cursor-not-allowed"
+            >
+              BATCH UNSTAKE
+            </button>
           </div>
           <div className="flex-1 flex flex-col justify-between px-4 sm:py-4 py-2 items-center">
             <div className="flex flex-row w-full gap-2 sm:text-[24px] text-[20px]">

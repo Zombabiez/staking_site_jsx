@@ -23,6 +23,7 @@ import {
   updateRefreshingAction,
   updateWalletAction,
   updateStakeContracts,
+  updateZombabieNFTContract,
   updateZombabieNFTGen1Contract,
   updateZombabieNFTGen2Contract,
 } from "../Store/actions";
@@ -30,6 +31,7 @@ import {
 import { defaultWallet, defaultChainData, defaultGenInfo } from "../enums";
 import { hexToInt } from "../Helpers/utils";
 
+import ZombabieNFTJson from "../abis/ZombabieNFT.json";
 import ZombabieNFTGen1Json from "../abis/ZombabieNFTGen1.json";
 import ZombabieNFTGen2Json from "../abis/ZombabieNFTGen2.json";
 import ZombabieStakingPool1Json from "../abis/ZombabieStakingPool1.json";
@@ -95,13 +97,21 @@ const Dashboard = () => {
         message: "Complete",
       });
 
-      //* ZombabieNFTGen1 Contract
-      const ZombabieNFTGen1Contract = new ethers.Contract(
-        ZombabieNFTGen1Json.address,
-        ZombabieNFTGen1Json.abi,
+      //! ZombabieNFT Contract Testing
+      const ZombabieNFTContract = new ethers.Contract(
+        ZombabieNFTJson.address,
+        ZombabieNFTJson.abi,
         newWallet.browserWeb3Provider.getSigner()
       );
-      updateZombabieNFTGen1Contract(dispatch, ZombabieNFTGen1Contract);
+      updateZombabieNFTContract(dispatch, ZombabieNFTContract);
+
+      // //* ZombabieNFTGen1 Contract
+      // const ZombabieNFTGen1Contract = new ethers.Contract(
+      //   ZombabieNFTGen1Json.address,
+      //   ZombabieNFTGen1Json.abi,
+      //   newWallet.browserWeb3Provider.getSigner()
+      // );
+      // updateZombabieNFTGen1Contract(dispatch, ZombabieNFTGen1Contract);
 
       // //* ZombabieNFTGen2 Contract
       // const ZombabieNFTGen2Contract = new ethers.Contract(
@@ -147,46 +157,46 @@ const Dashboard = () => {
 
       const [
         unclaimed1,
-        // unclaimed2,
-        // unclaimed3,
-        // unclaimed4,
-        // unclaimed5,
+        unclaimed2,
+        unclaimed3,
+        unclaimed4,
+        unclaimed5,
         totalDeposit1,
-        // totalDeposit2,
-        // totalDeposit3,
-        // totalDeposit4,
-        // totalDeposit5,
+        totalDeposit2,
+        totalDeposit3,
+        totalDeposit4,
+        totalDeposit5,
         staker1,
-        // staker2,
-        // staker3,
-        // staker4,
-        // staker5,
+        staker2,
+        staker3,
+        staker4,
+        staker5,
         rate1,
-        // rate2,
-        // rate3,
-        // rate4,
-        // rate5,
+        rate2,
+        rate3,
+        rate4,
+        rate5,
       ] = await Promise.all([
         ZombabieStakingPool1.availableRewards(newWallet.address),
-        // ZombabieStakingPool2.availableRewards(newWallet.address),
-        // ZombabieStakingPool3.availableRewards(newWallet.address),
-        // ZombabieStakingPool4.availableRewards(newWallet.address),
-        // ZombabieStakingPool5.availableRewards(newWallet.address),
+        ZombabieStakingPool2.availableRewards(newWallet.address),
+        ZombabieStakingPool3.availableRewards(newWallet.address),
+        ZombabieStakingPool4.availableRewards(newWallet.address),
+        ZombabieStakingPool5.availableRewards(newWallet.address),
         ZombabieStakingPool1.getTotalStaked(),
-        // ZombabieStakingPool2.getTotalStaked(),
-        // ZombabieStakingPool3.getTotalStaked(),
-        // ZombabieStakingPool4.getTotalStaked(),
-        // ZombabieStakingPool5.getTotalStaked(),
+        ZombabieStakingPool2.getTotalStaked(),
+        ZombabieStakingPool3.getTotalStaked(),
+        ZombabieStakingPool4.getTotalStaked(),
+        ZombabieStakingPool5.getTotalStaked(),
         ZombabieStakingPool1.stakers(newWallet.address),
-        // ZombabieStakingPool2.stakers(newWallet.address),
-        // ZombabieStakingPool3.stakers(newWallet.address),
-        // ZombabieStakingPool4.stakers(newWallet.address),
-        // ZombabieStakingPool5.stakers(newWallet.address),
+        ZombabieStakingPool2.stakers(newWallet.address),
+        ZombabieStakingPool3.stakers(newWallet.address),
+        ZombabieStakingPool4.stakers(newWallet.address),
+        ZombabieStakingPool5.stakers(newWallet.address),
         ZombabieStakingPool1.getMonthlyRate(newWallet.address),
-        // ZombabieStakingPool2.getMonthlyRate(newWallet.address),
-        // ZombabieStakingPool3.getMonthlyRate(newWallet.address),
-        // ZombabieStakingPool4.getMonthlyRate(newWallet.address),
-        // ZombabieStakingPool5.getMonthlyRate(newWallet.address),
+        ZombabieStakingPool2.getMonthlyRate(newWallet.address),
+        ZombabieStakingPool3.getMonthlyRate(newWallet.address),
+        ZombabieStakingPool4.getMonthlyRate(newWallet.address),
+        ZombabieStakingPool5.getMonthlyRate(newWallet.address),
       ]);
 
       setGen1Info({
@@ -194,32 +204,32 @@ const Dashboard = () => {
         totalDeposit: hexToInt(totalDeposit1),
         currentDeposit: hexToInt(staker1.amountStaked),
       });
-      // setGen2Info({
-      //   Rate: parseFloat(ethers.utils.formatEther(rate2)).toFixed(2),
-      //   totalDeposit: hexToInt(totalDeposit2),
-      //   currentDeposit: hexToInt(staker2.amountStaked),
-      // });
-      // setGen3Info({
-      //   Rate: parseFloat(ethers.utils.formatEther(rate3)).toFixed(2),
-      //   totalDeposit: hexToInt(totalDeposit3),
-      //   currentDeposit: hexToInt(staker3.amountStaked),
-      // });
-      // setGen4Info({
-      //   Rate: parseFloat(ethers.utils.formatEther(rate4)).toFixed(2),
-      //   totalDeposit: hexToInt(totalDeposit4),
-      //   currentDeposit: hexToInt(staker4.amountStaked),
-      // });
-      // setGen5Info({
-      //   Rate: parseFloat(ethers.utils.formatEther(rate5)).toFixed(2),
-      //   totalDeposit: hexToInt(totalDeposit5),
-      //   currentDeposit: hexToInt(staker5.amountStaked),
-      // });
+      setGen2Info({
+        Rate: parseFloat(ethers.utils.formatEther(rate2)).toFixed(2),
+        totalDeposit: hexToInt(totalDeposit2),
+        currentDeposit: hexToInt(staker2.amountStaked),
+      });
+      setGen3Info({
+        Rate: parseFloat(ethers.utils.formatEther(rate3)).toFixed(2),
+        totalDeposit: hexToInt(totalDeposit3),
+        currentDeposit: hexToInt(staker3.amountStaked),
+      });
+      setGen4Info({
+        Rate: parseFloat(ethers.utils.formatEther(rate4)).toFixed(2),
+        totalDeposit: hexToInt(totalDeposit4),
+        currentDeposit: hexToInt(staker4.amountStaked),
+      });
+      setGen5Info({
+        Rate: parseFloat(ethers.utils.formatEther(rate5)).toFixed(2),
+        totalDeposit: hexToInt(totalDeposit5),
+        currentDeposit: hexToInt(staker5.amountStaked),
+      });
 
-      let balance = BigNumber.from(unclaimed1);
-      // .add(unclaimed2)
-      // .add(unclaimed3)
-      // .add(unclaimed4)
-      // .add(unclaimed5);
+      let balance = BigNumber.from(unclaimed1)
+        .add(unclaimed2)
+        .add(unclaimed3)
+        .add(unclaimed4)
+        .add(unclaimed5);
 
       setUnClaimedReward(
         parseFloat(ethers.utils.formatEther(balance)).toFixed(2)
@@ -245,30 +255,25 @@ const Dashboard = () => {
   const claimRewards = async () => {
     setLoading(true);
     try {
-      const [
-        unclaimed1,
-        //  unclaimed2,
-        // unclaimed3,
-        //  unclaimed4,
-        // unclaimed5
-      ] = await Promise.all([
-        state.StakeContracts.ZombabieStakingPool1.availableRewards(address),
-        state.StakeContracts.ZombabieStakingPool2.availableRewards(address),
-        state.StakeContracts.ZombabieStakingPool3.availableRewards(address),
-        state.StakeContracts.ZombabieStakingPool4.availableRewards(address),
-        state.StakeContracts.ZombabieStakingPool5.availableRewards(address),
-      ]);
+      const [unclaimed1, unclaimed2, unclaimed3, unclaimed4, unclaimed5] =
+        await Promise.all([
+          state.StakeContracts.ZombabieStakingPool1.availableRewards(address),
+          state.StakeContracts.ZombabieStakingPool2.availableRewards(address),
+          state.StakeContracts.ZombabieStakingPool3.availableRewards(address),
+          state.StakeContracts.ZombabieStakingPool4.availableRewards(address),
+          state.StakeContracts.ZombabieStakingPool5.availableRewards(address),
+        ]);
 
       if (hexToInt(unclaimed1))
         await state.StakeContracts.ZombabieStakingPool1.claimRewards();
-      // if (hexToInt(unclaimed2))
-      //   await state.StakeContracts.ZombabieStakingPool2.claimRewards();
-      // if (hexToInt(unclaimed3))
-      //   await state.StakeContracts.ZombabieStakingPool3.claimRewards();
-      // if (hexToInt(unclaimed4))
-      //   await state.StakeContracts.ZombabieStakingPool4.claimRewards();
-      // if (hexToInt(unclaimed5))
-      //   await state.StakeContracts.ZombabieStakingPool5.claimRewards();
+      if (hexToInt(unclaimed2))
+        await state.StakeContracts.ZombabieStakingPool2.claimRewards();
+      if (hexToInt(unclaimed3))
+        await state.StakeContracts.ZombabieStakingPool3.claimRewards();
+      if (hexToInt(unclaimed4))
+        await state.StakeContracts.ZombabieStakingPool4.claimRewards();
+      if (hexToInt(unclaimed5))
+        await state.StakeContracts.ZombabieStakingPool5.claimRewards();
 
       toast.success("Successfully claimed rewards!");
     } catch (err) {

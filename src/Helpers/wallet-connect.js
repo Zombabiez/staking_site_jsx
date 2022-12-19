@@ -16,24 +16,24 @@ export const connect = async () => {
     localStorage.clear();
     const provider = new WalletConnectProvider({
       rpc: {
-        [config.configVars.rpcNetwork_mainnet.chainId]:
-          config.configVars.rpcNetwork_mainnet.rpcUrl,
+        [config.configVars.rpcNetwork.chainId]:
+          config.configVars.rpcNetwork.rpcUrl,
       },
       // This chainId parameter is not mentioned
       // in the WalletConnect documentation,
       // But is necessary otherwise
       // WalletConnect will connect to Ethereum mainnet
-      chainId: config.configVars.rpcNetwork_mainnet.chainId,
+      chainId: config.configVars.rpcNetwork.chainId,
       qrcodeModalOptions: {
         mobileLinks: ["crypto.com"],
       },
     });
     await provider.enable();
     const ethersProvider = new ethers.providers.Web3Provider(provider);
-    if (!(provider.chainId === config.configVars.rpcNetwork_mainnet.chainId)) {
+    if (!(provider.chainId === config.configVars.rpcNetwork.chainId)) {
       window.alert(
         "Switch your Wallet to blockchain network " +
-          config.configVars.rpcNetwork_mainnet.chainName
+          config.configVars.rpcNetwork.chainName
       );
       return defaultWallet;
     }
@@ -43,7 +43,7 @@ export const connect = async () => {
       address: (await ethersProvider.listAccounts())[0],
       browserWeb3Provider: ethersProvider,
       serverWeb3Provider: new ethers.providers.JsonRpcProvider(
-        config.configVars.rpcNetwork_mainnet.rpcUrl
+        config.configVars.rpcNetwork.rpcUrl
       ),
       connected: true,
       chainId: provider.chainId,

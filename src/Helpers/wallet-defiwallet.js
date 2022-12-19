@@ -16,13 +16,13 @@ import { defaultWallet } from "../enums";
 export const connect = async () => {
   try {
     const connector = new DeFiWeb3Connector({
-      supportedChainIds: [config.configVars.rpcNetwork_mainnet.chainId],
+      supportedChainIds: [config.configVars.rpcNetwork.chainId],
       appName: "My Dapp",
       chainType: "eth", // Same value for any EVM chains
-      chainId: [config.configVars.rpcNetwork_mainnet.chainId].toString(),
+      chainId: [config.configVars.rpcNetwork.chainId].toString(),
       rpcUrls: {
-        [config.configVars.rpcNetwork_mainnet.chainId]:
-          config.configVars.rpcNetwork_mainnet.rpcUrl,
+        [config.configVars.rpcNetwork.chainId]:
+          config.configVars.rpcNetwork.rpcUrl,
       },
     });
     connector.activate();
@@ -32,26 +32,26 @@ export const connect = async () => {
     // const provider = new DeFiConnectProvider({
     //   appName: "My Dapp",
     //   chainType: "eth", // Same value for any EVM chains
-    //   chainId: [config.configVars.rpcNetwork_mainnet.chainId].toString(),
+    //   chainId: [config.configVars.rpcNetwork.chainId].toString(),
     //   rpcUrls: {
-    //     [config.configVars.rpcNetwork_mainnet.chainId]:
-    //       config.configVars.rpcNetwork_mainnet.rpcUrl,
+    //     [config.configVars.rpcNetwork.chainId]:
+    //       config.configVars.rpcNetwork.rpcUrl,
     //   },
     // });
     const web3Provider = new ethers.providers.Web3Provider(provider);
     if (
       !(
         parseInt(provider.networkConfig.chainId) ===
-        config.configVars.rpcNetwork_mainnet.chainId
+        config.configVars.rpcNetwork.chainId
       )
     ) {
       window.alert(
         "Switch your Wallet to blockchain network " +
-          config.configVars.rpcNetwork_mainnet.chainName +
+          config.configVars.rpcNetwork.chainName +
           ". Chain ID is " +
           parseInt(provider.chainId) +
           " instead of " +
-          config.configVars.rpcNetwork_mainnet.chainId
+          config.configVars.rpcNetwork.chainId
       );
       return defaultWallet;
     }
@@ -65,7 +65,7 @@ export const connect = async () => {
       address: accounts[0],
       browserWeb3Provider: web3Provider,
       serverWeb3Provider: new ethers.providers.JsonRpcProvider(
-        config.configVars.rpcNetwork_mainnet.rpcUrl
+        config.configVars.rpcNetwork.rpcUrl
       ),
       connected: true,
       chainId: parseInt(provider.chainId),

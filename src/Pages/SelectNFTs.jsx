@@ -33,10 +33,14 @@ const SelectNFTs = () => {
     state.StakeContracts.ZombabieStakingPool4,
     state.StakeContracts.ZombabieStakingPool5,
   ];
-  const { ZombabieNFTGen1Contract, ZombabieNFTGen2Contract } = state;
+  const {
+    ZombabieNFTContract,
+    ZombabieNFTGen1Contract,
+    ZombabieNFTGen2Contract,
+  } = state;
 
-  const ZombabieNFTContract =
-    pool === 1 ? ZombabieNFTGen1Contract : ZombabieNFTGen2Contract;
+  // const ZombabieNFTContract =
+  //   pool === 1 ? ZombabieNFTGen1Contract : ZombabieNFTGen2Contract;
 
   const initializeNFTList = async () => {
     if (isStake) {
