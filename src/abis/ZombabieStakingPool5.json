@@ -1,5 +1,5 @@
 {
-  "address": "0x3De2C4Ef56ebDeC9AE7693E1db64fE60d2779872",
+  "address": "0x1ebe85B100457AF05E912E2Be2b76389f9378C96",
   "abi": [
     {
       "inputs": [
@@ -78,13 +78,6 @@
         { "internalType": "address", "name": "_staker", "type": "address" }
       ],
       "name": "getMonthlyRate",
-      "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "getRewardPerHour",
       "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
       "stateMutability": "view",
       "type": "function"
